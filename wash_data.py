@@ -5,8 +5,8 @@ LastEditors: MrLiuYS
 Description: 
 '''
 
-from bs4 import BeautifulSoup
-
+# from bs4 import BeautifulSoup
+import bs4
 import json
 import re
 
@@ -88,12 +88,29 @@ def get_panel2(soup):
         if (row.name != None)  :
             subs=[]
             for sub in row:
-                if (sub.name != None):
-                    sub1s=[]
-                    for sub1 in sub:
-                        if (sub1.name != None):
-                            sub1s.append(strFormat(sub1.text))
-                    subs.append(sub1s)
+                # if (sub.name != None):
+                
+                if type(sub) == bs4.element.NavigableString:
+                    subs.append(strFormat(sub))
+                else :
+                    subs.append(strFormat(sub.text))
+
+                # print(type(sub))
+                # print(sub)
+                # print('------------')
+
+                # if type(sub) == str:
+                #     sub1s.append(strFormat(sub))
+                # else:    
+                #     for sub1 in sub:
+                #         print(sub1)
+                #         print('------------')
+                #         # if type(sub) == str:
+                #         #     sub1s.append(strFormat(sub1))
+                #         # else:
+                #         #     sub1s.append(strFormat(sub1.text))
+
+                # subs.append(sub1s)
 
             bs.append(subs)
 
@@ -105,7 +122,7 @@ def strFormat(str):
 
 def washData():
 
-    soup = BeautifulSoup(open('files/1966_1_1_1_M_N.htm'), 'html.parser')    
+    soup = bs4.BeautifulSoup(open('files/1966_1_1_1_M_N.htm'), 'html.parser')    
     panel = soup.findAll('div',class_='ResultContent')[0]
     
     with open("data.json", "w") as fd:
