@@ -88,30 +88,25 @@ def get_panel2(soup):
         if (row.name != None)  :
             subs=[]
             for sub in row:
-                # if (sub.name != None):
-                
                 if type(sub) == bs4.element.NavigableString:
                     subs.append(strFormat(sub))
                 else :
                     subs.append(strFormat(sub.text))
+            bs.append(subs)
 
-                # print(type(sub))
-                # print(sub)
-                # print('------------')
+    return bs
 
-                # if type(sub) == str:
-                #     sub1s.append(strFormat(sub))
-                # else:    
-                #     for sub1 in sub:
-                #         print(sub1)
-                #         print('------------')
-                #         # if type(sub) == str:
-                #         #     sub1s.append(strFormat(sub1))
-                #         # else:
-                #         #     sub1s.append(strFormat(sub1.text))
-
-                # subs.append(sub1s)
-
+def get_panel3(soup):
+    bs = []
+    panel2 = soup.find_all(id='panel3')[0]
+    for index, row in enumerate(panel2):
+        if (row.name != None)  :
+            subs=[]
+            for sub in row:
+                if type(sub) == bs4.element.NavigableString:
+                    subs.append(strFormat(sub))
+                else :
+                    subs.append(strFormat(sub.text))
             bs.append(subs)
 
     return bs
@@ -137,6 +132,8 @@ def washData():
         map["get_panel_head_nav"]=get_panel_head_nav(panel)
         map["get_panel1"]=get_panel1(panel)
         map["get_panel2"]=get_panel2(panel)
+        map["get_panel3"]=get_panel3(panel)
+        
         
         
         
