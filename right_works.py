@@ -10,6 +10,8 @@ import requests
 import json
 import random
 
+import os
+
 import urllib.parse
 import urllib.request
 
@@ -113,39 +115,51 @@ def rightWord(year,month,day,hour,sex='M',earth='N'):
     # proxy ={'http': 'http://103.87.236.153:8080','https': 'http://103.87.236.153:8080'}
     # print(proxy)
 
-    proxyMeta="5.135.250.42:3128"
+
+
+    # proxyMeta="103.15.167.35:41787"
+    proxyMeta="127.0.0.1:4780"
+
+    # os.environ["https_proxy"] = f'http://{proxyMeta}'
 
     proxies = {
         "http":proxyMeta,
-        # "https":proxyMeta
+        "https":proxyMeta
     }
 
     proxy_handler = urllib.request.ProxyHandler(proxies)
     opener = urllib.request.build_opener(proxy_handler)
-    urllib.request.install_opener(opener)
+    # urllib.request.install_opener(opener)
 
 
-    formdata = urllib.parse.urlencode(formdata).encode('utf-8')
+    data = bytes(urllib.parse.urlencode(formdata), encoding="utf-8")
+    
+    try:
+        req = urllib.request.Request(url=req_url, headers=req_header,data=data, method='POST')
+        response = opener.open(req).read().decode()
+        soup = BeautifulSoup(response, 'html.parser')
+        panel = soup.findAll('div',class_='ResultContent')[0]
 
-    req = urllib.request.Request(url=req_url, headers=req_header, method='POST')
-    response = urllib.request.urlopen(req,formdata).read().decode()
-
-    # print('-------------')
-    # print(response)
-
-    #发起请求
-    # response = requests.post(
-    #     req_url, 
-    #     data = formdata, 
-    #     headers = req_header,
-    #     proxies=proxies,
-    #     # timeout=5
-    # )
-    soup = BeautifulSoup(response, 'html.parser')
-
-    panel = soup.findAll('div',class_='ResultContent')[0]
-
-    # print("------------1111111111")
+    except urllib.error.URLError as e:
+        # print("------------3333333333")
+        # print(e.reason)
+        # print("------------4444444444")
+        panel =""
+    print("------------1111111111")
     print(panel)
-    # print("------------2222222222")
+    print("------------2222222222")
     return panel
+
+    # try:
+        
+    #     # print("------------1111111111")
+    #     # print(panel)
+    #     # print("------------2222222222")
+    #     return panel
+    # except expression as e:
+    #     print(e.code())
+        
+    # return "page"
+
+
+
