@@ -10,6 +10,7 @@ import bs4
 import json
 import re
 
+import os
 
 #1966年1月1日01-03時  (刀砧日)
 def get_top_header_time(soup):
@@ -44,7 +45,7 @@ def get_top_table_header(soup):
 
 def get_top_table(soup):
     bs = []
-    table_header = soup.table.contents[3]
+    table_header = soup.table
     for index, row in enumerate(table_header):
         if (row.name != None)  :
             subs=[]
@@ -198,12 +199,13 @@ def strFormat(str):
     return re.sub(r'\s+','$_$',str)
 
 
-def washData():
+def washData(file):
 
-    soup = bs4.BeautifulSoup(open('files/1966_1_1_1_M_N.htm'), 'html.parser')    
+    soup = bs4.BeautifulSoup(open(('files/%s' % file)), 'html.parser')    
+    # soup = bs4.BeautifulSoup(open('files/1966_1_1_1_M_N.htm'), 'html.parser')    
     panel = soup.findAll('div',class_='ResultContent')[0]
     
-    with open("data.json", "w") as fd:
+    with open(('datas/%s' % file.replace(".htm", ".json")), "w") as fd:
         map = {}
         map["top_header_time"]=get_top_header_time( panel)
         
@@ -233,4 +235,14 @@ def washData():
     return panel
 
 
-washData()
+# washData()
+
+
+
+list = os.listdir("./files/")
+
+print(list)
+
+for path in list:
+    washData(path)
+
