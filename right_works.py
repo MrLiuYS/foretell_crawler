@@ -112,9 +112,18 @@ def rightWord(year,month,day,hour,sex='M',earth='N'):
 
     # proxy ={'http': 'http://103.87.236.153:8080','https': 'http://103.87.236.153:8080'}
     # print(proxy)
-    # proxy_handler = urllib.request.ProxyHandler(proxy)
-    # opener = urllib.request.build_opener(proxy_handler)
-    # urllib.request.install_opener(opener)
+
+    proxyMeta="5.135.250.42:3128"
+
+    proxies = {
+        "http":proxyMeta,
+        # "https":proxyMeta
+    }
+
+    proxy_handler = urllib.request.ProxyHandler(proxies)
+    opener = urllib.request.build_opener(proxy_handler)
+    urllib.request.install_opener(opener)
+
 
     formdata = urllib.parse.urlencode(formdata).encode('utf-8')
 
