@@ -43,23 +43,41 @@ def get_top_table_header(soup):
 #             bs.append(subs)
 #     return bs
 
+def traverse(tree,treeArray):
+
+    for node in tree:
+        if type(node) == bs4.element.Tag:
+
+           treeArray.append( traverse(node,[]))
+        elif type(node) == bs4.element.NavigableString:
+            print('-----------------222')
+            treeArray.append(node)
+            print('-----------------222')
+        else :
+            print('-----------------333')
+            treeArray.append(node)
+            print('-----------------333')
+            # subs.append(strFormat(sub.text))
+    return treeArray
+
 def get_top_table(soup):
     bs = []
     table_header = soup.table
-    for index, row in enumerate(table_header):
-        if (row.name != None)  :
-            subs=[]
-            for sub in row:
-                if (sub.name != None):
-                    sub1s=[]
-                    for sub1 in sub:
-                        if (sub1.name != None):
-                            sub1s.append(strFormat(sub1.text))
-                    subs.append(sub1s)
-
-            bs.append(subs)
-
-    return bs
+    return traverse(table_header,bs)
+    # for index, row in enumerate(table_header):
+    #     if (row.name != None)  :
+    #         subs=[]
+    #         for sub in row:
+    #             print(type(sub))
+    #             print('-----------------')
+    #             if (sub.name != None):
+    #                 sub1s=[]
+    #                 for sub1 in sub:
+    #                     if (sub1.name != None):
+    #                         sub1s.append(strFormat(sub1.text))
+    #                 subs.append(sub1s)
+    #         bs.append(subs)
+    # return bs
 
 def get_panel_head_nav(soup):
     bs = []
@@ -240,8 +258,6 @@ def washData(file):
 
 
 list = os.listdir("./files/")
-
-print(list)
 
 for path in list:
     washData(path)
