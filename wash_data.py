@@ -114,23 +114,85 @@ def get_panel3(soup):
 def get_panel3_columnar(soup):
     bs = []
     panel = soup.find_all("table", width="420")[0]
-    # panel.parent
     
     for index, row in enumerate(panel.find_all('img')):
-        # if (row.name != None)  :
-        print(row.attrs)
-        print(row.attrs["src"])
-        print(row.attrs["style"].width)
-        print('-----------------')
-        #     subs=[]
-        #     for sub in row:
-        #         if type(sub) == bs4.element.NavigableString:
-        #             subs.append(strFormat(sub))
-        #         else :
-        #             subs.append(strFormat(sub.text))
-        #     bs.append(subs)
+        map={}
+        map["src"]=row.attrs["src"]
+        map["style"]=row.attrs["style"]
+        bs.append(map)
 
     return bs
+
+#流年運勢
+def get_panel4(soup):
+    bs = []
+    panel2 = soup.find_all(id='panel4')[0]
+    for index, row in enumerate(panel2):
+        if (row.name != None)  :
+            subs=[]
+            for sub in row:
+                if type(sub) == bs4.element.NavigableString:
+                    subs.append(strFormat(sub))
+                else :
+                    subs.append(strFormat(sub.text))
+            bs.append(subs)
+
+    return bs
+
+#趨吉避凶
+def get_panel5(soup):
+    bs = []
+    panel2 = soup.find_all(id='panel5')[0]
+    for index, row in enumerate(panel2):
+        if (row.name != None)  :
+            subs=[]
+            for sub in row:
+                if type(sub) == bs4.element.NavigableString:
+                    subs.append(strFormat(sub))
+                else :
+                    subs.append(strFormat(sub.text))
+            bs.append(subs)
+
+    return bs
+
+#秤骨論命
+def get_panel6(soup):
+    bs = []
+    panel2 = soup.find_all(id='panel6')[0]
+    for index, row in enumerate(panel2):
+        if (row.name != None)  :
+            subs=[]
+            for sub in row:
+                if type(sub) == bs4.element.NavigableString:
+                    subs.append(strFormat(sub))
+                else :
+                    subs.append(strFormat(sub.text))
+            bs.append(subs)
+
+    return bs
+
+#生肖論命
+def get_panel7(soup):
+    bs = []
+    panel2 = soup.find_all(id='panel7')[0]
+    for index, row in enumerate(panel2):
+        if (row.name != None)  :
+            subs=[]
+            for sub in row:
+                if type(sub) == bs4.element.NavigableString:
+                    subs.append(strFormat(sub))
+                else :
+                    subs.append(strFormat(sub.text))
+            bs.append(subs)
+
+    return bs
+
+#生肖
+def get_panel7_zodiac(soup):
+    # bs = []
+    panel = soup.find_all("img", width="120")[0]
+    
+    return panel.attrs["src"]
 
 def strFormat(str):
     return re.sub(r'\s+','$_$',str)
@@ -154,11 +216,15 @@ def washData():
         map["get_panel1"]=get_panel1(panel)
         map["get_panel2"]=get_panel2(panel)
         map["get_panel3"]=get_panel3(panel)
+        map["get_panel3_columnar"]=get_panel3_columnar(panel)
 
-        get_panel3_columnar(panel)
-        
-        
-        
+        map["get_panel4"]=get_panel4(panel)
+        map["get_panel5"]=get_panel5(panel)
+        map["get_panel6"]=get_panel6(panel)
+        map["get_panel7"]=get_panel7(panel)
+
+        map["zodiac"]=get_panel7_zodiac(panel)
+
         
         
         fd.write(json.dumps(map ,ensure_ascii=False))
