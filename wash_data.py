@@ -48,14 +48,20 @@ def traverse(tree,treeArray):
     for node in tree:
         if type(node) == bs4.element.Tag:
 
-           treeArray.append( traverse(node,[]))
+            pTree= traverse(node,[])
+            if(len(pTree)):
+                treeArray.append(pTree)
+            
         elif type(node) == bs4.element.NavigableString:
             print('-----------------222')
-            treeArray.append(node)
+            if len(node):
+                treeArray.append(node)
+            
             print('-----------------222')
         else :
             print('-----------------333')
-            treeArray.append(node)
+            if len(node):
+                treeArray.append(node)
             print('-----------------333')
             # subs.append(strFormat(sub.text))
     return treeArray
@@ -118,17 +124,19 @@ def get_panel2(soup):
 def get_panel3(soup):
     bs = []
     panel2 = soup.find_all(id='panel3')[0]
-    for index, row in enumerate(panel2):
-        if (row.name != None)  :
-            subs=[]
-            for sub in row:
-                if type(sub) == bs4.element.NavigableString:
-                    subs.append(strFormat(sub))
-                else :
-                    subs.append(strFormat(sub.text))
-            bs.append(subs)
 
-    return bs
+    return traverse(panel2,bs)
+    # for index, row in enumerate(panel2):
+    #     if (row.name != None)  :
+    #         subs=[]
+    #         for sub in row:
+    #             if type(sub) == bs4.element.NavigableString:
+    #                 subs.append(strFormat(sub))
+    #             else :
+    #                 subs.append(strFormat(sub.text))
+    #         bs.append(subs)
+
+    # return bs
 # 柱状图
 def get_panel3_columnar(soup):
     bs = []
