@@ -136,7 +136,7 @@ def rightWord(year,month,day,hour,sex='M',earth='N'):
 
     panel = soup.findAll('div',class_='ResultContent')[0]
 
-    print("------------1111111111")
+    # print("------------1111111111")
     print(panel)
-    print("------------2222222222")
+    # print("------------2222222222")
     return panel
