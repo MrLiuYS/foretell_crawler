@@ -25,7 +25,8 @@ def daterange(start, end):
 
         start += timedelta(hours=1)
     
-start_date ='1965-12-31 22:00:00'
+# start_date ='1965-12-31 22:00:00'
+start_date ='1966-1-1 22:00:00'
 end_date ='1967-01-01 23:59:59'
 
 start_date_object = datetime.strptime(start_date, '%Y-%m-%d %H:%M:%S')
