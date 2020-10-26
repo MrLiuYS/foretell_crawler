@@ -117,8 +117,8 @@ def rightWord(year,month,day,hour,sex='M',earth='N'):
 
 
 
-    # proxyMeta="103.15.167.35:41787"
-    proxyMeta="127.0.0.1:4780"
+    proxyMeta="123.101.207.247:9999" #"85.223.157.204:40329"
+    # proxyMeta="127.0.0.1:4780"
 
     # os.environ["https_proxy"] = f'http://{proxyMeta}'
 
@@ -144,7 +144,7 @@ def rightWord(year,month,day,hour,sex='M',earth='N'):
         # print("------------3333333333")
         # print(e.reason)
         # print("------------4444444444")
-        panel =""
+        panel ="親愛的用戶您好，您已達當日免費算命查詢次數限制上限！"
     print("------------1111111111")
     print(panel)
     print("------------2222222222")

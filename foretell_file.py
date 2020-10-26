@@ -28,7 +28,8 @@ def write(info,year=0,month=0,day=0,hour=0,sex='M',earth='N'):
 
     if (
         infoString.find("親愛的用戶您好，您已達當日免費算命查詢次數限制上限！") == -1 &
-       infoString.find("5歲以上之命盤分析，限付費會員才能讀取") == -1):
+        infoString.find("親愛的用戶您好，您已達當日免費算命查詢次數限制上限！") == -1 &
+        infoString.find("5歲以上之命盤分析，限付費會員才能讀取") == -1):
         fileObject = open(path + "/files/%s_%s_%s_%s_%s_%s.htm" % (year,month,day,hour,sex,earth), 'w')  
         fileObject.write(infoString)  
         fileObject.close
