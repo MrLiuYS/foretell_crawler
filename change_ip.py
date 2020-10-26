@@ -32,7 +32,7 @@ def get_proxy(html):
 # 验证已得到IP的可用性
 def test_proxies(proxies):
     proxies = proxies
-    url = "https://www.1688.com/"
+    url = "https://www.dearmoney.com.tw/eightwords/result_eight_words_page"
     header = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36",
         }
@@ -42,7 +42,7 @@ def test_proxies(proxies):
         print("第%s个。。" % count)
         count += 1
         try:
-            response = requests.get(url, headers=header, proxies={"http": proxy,"https": proxy}, timeout=1)
+            response = requests.get(url, headers=header, proxies={"http": proxy}, timeout=5)
             time = response.elapsed.total_seconds()
             print(time)
             if response.status_code == 200:
