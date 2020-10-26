@@ -88,8 +88,9 @@ agents = [
     "Mozilla/5.0 (Linux; U; Android 1.6; es-es; SonyEricssonX10i Build/R1FA016) AppleWebKit/528.5  (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1",
     "Mozilla/5.0 (Linux; U; Android 1.6; en-us; SonyEricssonX10i Build/R1AA056) AppleWebKit/528.5  (KHTML, like Gecko) Version/3.1.2 Mobile Safari/525.20.1"
 ]
- 
-def rightWord(year,month,day,hour,sex='M',earth='N'):
+
+
+def rightWord(year, month, day, hour, sex='M', earth='N'):
     # #表单数据
     formdata = {
         '_Year': year,
@@ -109,57 +110,51 @@ def rightWord(year,month,day,hour,sex='M',earth='N'):
     # #添加请求头
     req_header = {
         'User-Agent': random.choice(agents),
-        'ue': 'utf-8', # 设置翻译支持中文
+        'ue': 'utf-8',  # 设置翻译支持中文
     }
 
     # proxy ={'http': 'http://103.87.236.153:8080','https': 'http://103.87.236.153:8080'}
     # print(proxy)
 
-
-
-    proxyMeta="123.101.207.247:9999" #"85.223.157.204:40329"
+    proxyMeta = "115.211.44.169:9000"  # "85.223.157.204:40329"
     # proxyMeta="127.0.0.1:4780"
 
     # os.environ["https_proxy"] = f'http://{proxyMeta}'
 
     proxies = {
-        "http":proxyMeta,
-        "https":proxyMeta
+        "http": proxyMeta,
+        "https": proxyMeta
     }
 
     proxy_handler = urllib.request.ProxyHandler(proxies)
     opener = urllib.request.build_opener(proxy_handler)
     # urllib.request.install_opener(opener)
 
-
     data = bytes(urllib.parse.urlencode(formdata), encoding="utf-8")
-    
+
     try:
-        req = urllib.request.Request(url=req_url, headers=req_header,data=data, method='POST')
+        req = urllib.request.Request(url=req_url, headers=req_header, data=data, method='POST')
         response = opener.open(req).read().decode()
         soup = BeautifulSoup(response, 'html.parser')
-        panel = soup.findAll('div',class_='ResultContent')[0]
+        panel = soup.findAll('div', class_='ResultContent')[0]
 
     except urllib.error.URLError as e:
         # print("------------3333333333")
         # print(e.reason)
         # print("------------4444444444")
-        panel ="親愛的用戶您好，您已達當日免費算命查詢次數限制上限！"
+        panel = "親愛的用戶您好，您已達當日免費算命查詢次數限制上限！$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     print("------------1111111111")
     print(panel)
     print("------------2222222222")
     return panel
 
     # try:
-        
+
     #     # print("------------1111111111")
     #     # print(panel)
     #     # print("------------2222222222")
     #     return panel
     # except expression as e:
     #     print(e.code())
-        
+
     # return "page"
-
-
-
