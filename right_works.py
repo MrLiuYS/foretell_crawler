@@ -135,7 +135,7 @@ def rightWord(aproxy, year, month, day, hour, sex='M', earth='N'):
 
     try:
         req = urllib.request.Request(url=req_url, headers=req_header, data=data, method='POST')
-        response = opener.open(req, timeout=30).read().decode()
+        response = opener.open(req, timeout=10).read().decode()
         soup = BeautifulSoup(response, 'html.parser')
         panel = soup.findAll('div', class_='ResultContent')[0]
     except:
