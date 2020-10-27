@@ -116,9 +116,9 @@ def rightWord(year, month, day, hour, sex='M', earth='N'):
     # proxy ={'http': 'http://103.87.236.153:8080','https': 'http://103.87.236.153:8080'}
     # print(proxy)
 
-    proxyMeta = "117.204.255.151:8080"  # "85.223.157.204:40329"
+    proxyMeta = "183.88.193.250:8080"  # "85.223.157.204:40329"
     # proxyMeta="127.0.0.1:4780"
-
+    #
     # os.environ["https_proxy"] = f'http://{proxyMeta}'
 
     proxies = {
