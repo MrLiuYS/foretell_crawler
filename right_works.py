@@ -91,7 +91,7 @@ agents = [
 ]
 
 
-def rightWord(year, month, day, hour, sex='M', earth='N'):
+def rightWord(aproxy, year, month, day, hour, sex='M', earth='N'):
     # #表单数据
     formdata = {
         '_Year': year,
@@ -117,7 +117,7 @@ def rightWord(year, month, day, hour, sex='M', earth='N'):
     # proxy ={'http': 'http://103.87.236.153:8080','https': 'http://103.87.236.153:8080'}
     # print(proxy)
 
-    proxyMeta = "150.138.253.71: 808"  # "85.223.157.204:40329"
+    proxyMeta = aproxy #"58.220.95.79: 10000"  # "85.223.157.204:40329"
     # proxyMeta="127.0.0.1:4780"
     #
     # os.environ["https_proxy"] = f'http://{proxyMeta}'
@@ -135,7 +135,7 @@ def rightWord(year, month, day, hour, sex='M', earth='N'):
 
     try:
         req = urllib.request.Request(url=req_url, headers=req_header, data=data, method='POST')
-        response = opener.open(req, timeout=10).read().decode()
+        response = opener.open(req, timeout=30).read().decode()
         soup = BeautifulSoup(response, 'html.parser')
         panel = soup.findAll('div', class_='ResultContent')[0]
     except:
