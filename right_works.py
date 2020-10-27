@@ -4,6 +4,7 @@ Date: 2020-10-19 14:35:15
 LastEditors: MrLiuYS
 Description: 抓取数据
 '''
+from socket import socket
 
 from bs4 import BeautifulSoup
 import requests
@@ -116,7 +117,7 @@ def rightWord(year, month, day, hour, sex='M', earth='N'):
     # proxy ={'http': 'http://103.87.236.153:8080','https': 'http://103.87.236.153:8080'}
     # print(proxy)
 
-    proxyMeta = "188.133.192.164:8081"  # "85.223.157.204:40329"
+    proxyMeta = "150.138.253.71: 808"  # "85.223.157.204:40329"
     # proxyMeta="127.0.0.1:4780"
     #
     # os.environ["https_proxy"] = f'http://{proxyMeta}'
@@ -137,12 +138,9 @@ def rightWord(year, month, day, hour, sex='M', earth='N'):
         response = opener.open(req, timeout=10).read().decode()
         soup = BeautifulSoup(response, 'html.parser')
         panel = soup.findAll('div', class_='ResultContent')[0]
+    except:
+        panel = "请求报错---------------"
 
-    except urllib.error.URLError as e:
-        # print("------------3333333333")
-        # print(e.reason)
-        # print("------------4444444444")
-        panel = "親愛的用戶您好，您已達當日免費算命查詢次數限制上限！$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     print("------------1111111111")
     print(panel)
     print("------------2222222222")
