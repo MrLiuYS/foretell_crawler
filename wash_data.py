@@ -264,7 +264,9 @@ def washData(file):
 
         map["zodiac"] = get_panel7_zodiac(panel)
 
-        fd.write(json.dumps(map, ensure_ascii=False))
+        info = json.dumps(map, ensure_ascii=False)
+
+        fd.write(info.replace("https://www.dearmoney.com.tw/","").replace("劍靈命理網",""))
         fd.close
 
     return panel
